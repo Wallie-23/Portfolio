@@ -1,0 +1,850 @@
+:root {
+  --header-height: 14rem; /* adjust based on your header padding */
+  --main-color: cyan; /* default highlight color */
+  --accent-color: silver;  /* secondary color */
+  --bg-color: black;       /* default background */
+  --text-color: white;     /* default text */
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  padding-top: var(--header-height); /* pushes content below header */
+}
+
+/* ==========================
+   RESET & GLOBAL
+========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+  font-family: 'Poppins', sans-serif;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+  overflow-x: hidden;
+}
+
+body {
+  background: black;
+  color: white;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ==========================
+   VIDEO BACKGROUND
+========================== */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+}
+
+/*==========================
+  NAVBAR Toggler BUTTON
+==========================*/
+/* Change navbar toggler button */
+.navbar-toggler {
+  border: 2px solid var(--main-color); /* border color */
+  background-color: rgba(0, 255, 255, 0.15); /* subtle cyan background */
+  border-radius: 0.5rem;
+  padding: 0.1rem 0.2rem;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+/* Change icon color (hamburger lines) */
+.navbar-toggler-icon {
+  background-image: none; /* remove default Bootstrap icon */
+  display: inline-block;
+  width: 1rem;
+  height: 1px;
+  background-color: var(--main-color); /* cyan line */
+  box-shadow: 3px var(--main-color), 6px var(--main-color); /* creates 3 lines */
+}
+
+/* Hover effect */
+.navbar-toggler:hover {
+  background-color: var(--main-color);
+  transform: scale(1.05);
+}
+
+/* ==========================
+   NAVBAR DROPDOWN BUTTON (MATCH NAV LINKS)
+========================== */
+.dropdown .btn {
+  background: none;          /* remove button background */
+  color:  silver;          /* same as other nav links */
+  font-size: 1.4rem;         /* match navbar a font-size */
+  font-weight: 40;
+  padding: 0.3rem 0.6rem;    /* smaller clickable area */
+  border: none;              /* remove border */
+  border-radius: 0;          /* keep flat, like text */
+  box-shadow: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  top: 0;
+  left: 0;
+}
+
+.dropdown .btn:hover {
+  color: var(--main-color);  /* same hover effect */
+  box-shadow: 0 0 1rem var(--main-color);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Change the background color of the dropdown menu */
+.dropdown-menu {
+  background-color: rgba(20, 20, 20, 0.95); /* darker custom background */
+  border: 1px solid var(--main-color);      /* optional border for contrast */
+  border-radius: 0.6rem;
+  backdrop-filter: blur(4px);               /* nice glass effect */
+  padding: 0.5rem 0;
+}
+
+/* Style the dropdown items inside */
+.dropdown-item {
+  color: black;
+  font-size: .8rem;
+  padding: 0.5rem 1.2rem;
+  font-weight: 400; 
+  transition: collr 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color:  rgba(0, 255, 255, 0.1);
+  color: var(--main-color);
+}
+
+/* ==========================
+   HEADER / NAV
+========================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 1rem var(--main-color);
+}
+
+.name {
+  font-size: 3rem;
+  color: silver;
+  font-weight: 600;
+}
+
+.name span {
+  color: var(--main-color);
+}
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar a {
+  font-size: 1.8rem;
+  color: silver;
+  transition: 0.3s;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: var(--main-color);
+  box-shadow: 0 0 1rem var(--main-color);
+}
+
+
+/* ==========================
+  HOME
+========================== */
+.home {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  text-align: left;
+  min-height: 100vh;
+  padding: 10rem 5%;
+  gap: 4rem;
+}
+
+.home-content {
+  max-width: 600px;
+  flex: 1;
+}
+
+.home h1 {
+  font-size: 4rem;
+  color: var(--main-color);
+  margin-bottom: 1rem;
+}
+
+.home h3 {
+  font-size: 2.5rem;
+  color: silver;
+}
+
+.home p {
+  font-size: 1.6rem;
+  color: silver;
+  max-width: 60ch;
+  margin-top: 1rem;
+}
+
+/* ==========================
+   PREMIUM 3D COIN
+========================== */
+
+.coin-spin {
+  width: 220px;
+  height: 220px;
+  perspective: 1200px;
+  margin: 0 auto;
+}
+
+/* Inner rotating element */
+.coin-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s ease;
+}
+
+/* Coin faces */
+.coin-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Face images */
+.coin-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: transparent;
+}
+
+/* Back face */
+.coin-face.back {
+  transform: rotateY(180deg);
+}
+
+/* Coin edge (thickness) */
+.coin-edge {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: rotateY(90deg);
+  background: linear-gradient(
+    90deg,
+    #666,
+    silver,
+    #999,
+    silver,
+    #666
+  );
+  pointer-events: none;
+}
+
+/* ==========================
+   GLOW ON HOVER
+========================== */
+
+.coin-spin:hover .coin-face,
+.coin-spin:hover .coin-edge {
+  box-shadow: 
+    0 0 15px var(--main-color),
+    0 0 30px var(--main-color);
+}
+
+/* Subtle scale on hover */
+.coin-spin:hover .coin-inner {
+  transform: scale(1.05);
+}
+
+
+/* ==========================
+   SOCIAL MEDIA ICONS
+========================== */
+.social-media {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.social-media a {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: .2rem solid var(--main-color);
+  border-radius: 50%;
+  font-size: 2rem;
+  color: var(--main-color);
+  transition: all .3s;
+}
+
+.social-media a:hover {
+  background: var(--main-color);
+  color: white;
+  box-shadow: 0 0 1rem var(--main-color);
+  transform: scale(1.1);
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+.btn a {
+  display: inline-block;
+  margin-top: 1..2rem;
+  padding: 1rem 1rem;
+  border-radius: 4rem;
+  background-color: var(--main-color);
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: .1rem;
+  transition: .3s ease;
+}
+
+.btn a:hover {
+  box-shadow: none;
+  background: var(--main-color);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 1rem var(--main-color);
+
+}
+
+/* ==========================
+   ABOUT
+========================== */
+.about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 2rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.about-content {
+  flex: 1 1 40rem;
+  text-align: left;
+}
+
+.about-content h2 {
+  font-size: 4rem;
+  color: var(--main-color);
+}
+
+.about-content h3 {
+  font-size: 1.6rem;
+  color: white;
+  margin-top: 2rem;
+  line-height: 1.6;
+}
+
+.about-content h3 span {
+  color: var(--main-color);
+}
+
+/* Learn More Button Container - Centered */
+.dropdown-btn-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;   /* stack vertically */
+  align-items: center;      /* center horizontally */
+  justify-content: center;
+  margin: 3rem 0;
+}
+
+.dropdown-btn {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 1rem 1rem;
+  border-radius: 4rem;
+  background-color: var(--main-color);
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: .1rem;
+  transition: .3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-btn:hover {
+  background: var(--main-color);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 1rem var(--main-color);
+}
+/* Coin + Dropdown Wrapper */
+.about-coin-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
+.coin-image img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  box-shadow: 0 0 2rem var(--main-color);
+}
+
+/* Dropdown Content (Right of Coin) */
+.dropdown-content {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.6s ease, opacity 0.4s ease;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 0 1.5rem;
+  border-radius: 1rem;
+  margin-top: 1.5rem;
+}
+
+.dropdown-content p {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: white;
+}
+
+/* Show Dropdown When Active */
+.dropdown-btn-container.active .dropdown-content {
+  max-height: 1200px; /* large enough for content */
+  opacity: 1;
+  padding: 1.5rem;
+}
+
+
+/* ==========================
+SKILLS
+========================== */
+.skills-section {
+  padding: 120px 2rem 60px;
+  text-align: center;
+}
+
+.skills-section h2 {
+  font-size: 3rem;
+  color: var(--main-color);
+  margin-bottom: 2rem;
+}
+
+.skills-section p {
+  color: silver;
+  font-size: 1.6rem;
+  max-width: 60ch;
+  margin: 0 auto 4rem;
+}
+
+.skills-section h3 {
+  color: var(--main-color);
+}
+
+.swiper {
+  padding: 20px 0;
+}
+  
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--main-color);
+  fill: var(--main-color);
+  stroke: var(--main-color);
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--main-color);
+}
+
+.swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.swiper-slide img {
+  max-width: 120px;
+  margin-bottom: 10px;
+}
+
+/* ==========================
+   PROJECTS (FIXED + POLISHED)
+========================== */
+.projects {
+  padding: 120px 2rem 60px;
+  text-align: center;
+}
+
+.projects h2 {
+  font-size: 3rem;
+  color: var(--main-color);
+  margin-bottom: 2rem;
+}
+
+.projects p {
+  color: silver;
+  font-size: 1.6rem;
+  max-width: 60ch;
+  margin: 0 auto 4rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  justify-items: center;
+}
+
+.project-card {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 0 15px var(--main-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 380px;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--main-color);
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.project-card-content {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.project-card h3 {
+  font-size: 1.8rem;
+  color: var(--main-color);
+  margin-bottom: 0.5rem;
+}
+
+.project-card p {
+  font-size: 1.4rem;
+  color: #ddd;
+  margin-bottom: 1rem;
+}
+
+.project-card .btn a {
+  display: inline-block;
+  background: var(--main-color);
+  color: black;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.project-card .btn a:hover {
+  background: var(--main-color);
+  transform: translateY(-3px);
+}
+
+
+/* ==========================
+  CONTACT
+========================== */
+/* Contact Form Horizontal Layout */
+.contact {
+padding: 120px 2rem 60px;
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: 3rem;
+  color: var(--main-color);
+  margin-bottom: 2rem;
+}
+
+.contact p {
+  color: silver;
+  font-size: 1.6rem;
+  max-width: 60ch;
+  margin: 0 auto 4rem;
+}
+
+.contact form {
+  max-width: 80rem; /* wider for horizontal layout */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Each row of inputs */
+.contact form .input-box {
+  display: flex;
+  flex-direction: row;  /* horizontal row */
+  gap: 1.5rem;
+  justify-content: space-between;
+  flex-wrap: wrap; /* wrap on small screens */
+}
+
+/* Input fields inside each row */
+.contact form .input-box .input-field input {
+  flex: 1 1 48%; /* take half row, with small gap */
+  padding: 1.5rem;
+  border-radius: .6rem;
+  border: .2rem solid var(--main-color);
+  background: black;
+  color: white;
+  font-size: 1.5rem;
+  transition: .3s;
+}
+
+/* Textarea stays full width */
+.contact form .textarea-field textarea {
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: .6rem;
+  border: .2rem solid var(--main-color);
+  background: black;
+  color: white;
+  font-size: 1.5rem;
+  resize: none;
+  min-height: 15rem;
+  transition: .3s;
+}
+
+/* Input/textarea focus effect */
+.contact form input:focus,
+.contact form textarea:focus {
+  border-color: white;
+  box-shadow: 0 0 8px var(--main-color);
+}
+
+/* Button */ 
+.contact form .btn-box { 
+  display: flex; 
+  justify-content: center; 
+} 
+
+.contact form .btn-box .btn { 
+  display: inline-block; 
+  margin-top: 1..2rem; 
+  padding: .1rem .1rem; 
+  border-radius: 4rem; 
+  background-color: var(--main-color); 
+  color: black; 
+  font-size: 1.5rem; 
+  font-weight: 500; 
+  letter-spacing: .1rem; 
+  transition: .3s ease; 
+} 
+
+.contact form .btn-box .btn:hover { 
+  box-shadow: none; 
+  background: var(--main-color); 
+  color: white; transform: scale(1.1); 
+  box-shadow: 0 0 1rem var(--main-color); 
+}
+
+/* Social media under contact form */
+.contact-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem; /* space below submit button */
+}
+
+.contact-social a {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: .2rem solid var(--main-color);
+  border-radius: 50%;
+  font-size: 1.8rem;
+  color: var(--main-color);
+  transition: all 0.3s;
+}
+
+.contact-social a:hover {
+  background: var(--main-color);
+  color: black;
+  box-shadow: 0 0 1rem var(--main-color);
+  transform: scale(1.1);
+}
+
+/* Mobile fix */ 
+@media (max-width: 480px) { 
+  .contact form .input-box { 
+    flex-direction: column; 
+  } 
+  .contact form .input-box .input-field input { 
+    flex: 1 1 100%; 
+  }
+}
+
+/* ==========================
+   FOOTER
+========================== */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 2rem;
+  color: silver;
+  font-size: 1.4rem;
+}
+
+.footer-iconTop a i {
+  font-size: 2.4rem;
+  color: var(--main-color);
+  transition: .3s;
+}
+
+.footer-iconTop a i:hover {
+  color: white;
+  box-shadow: 0 0 1rem var(--main-color);
+}
+ 
+/* Footer project link */
+.footer-text .nav-link h5 {
+  color: var(--main-color); /* cyan */
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-text .nav-link h5:hover {
+  color: #00e6e6; /* lighter cyan on hover */
+  text-decoration: underline;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+@media (max-width: 768px) {
+  .home {
+    flex-direction: column;
+    text-align: center;
+    gap: 3rem;
+  }
+  .home-content { 
+    max-width: 100%; 
+  }
+  .aboutme {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .about-content {
+    text-align: center;
+  }
+  .social-media { 
+    justify-content: center;
+  }
+  .about-content h2 { 
+    font-size: 3rem; 
+  }
+  .skills_head h2 { 
+    font-size: 3rem; 
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  .navbar {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+  .home h1 { font-size: 2.5rem; }
+  .home h3 { font-size: 1.8rem; }
+  .home p { font-size: 1.4rem; }
+}
+
+/* FORCE CENTER READ MORE BUTTON */
+.dropdown-btn-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.dropdown-btn {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
+
+/* Make Read More button match Download button exactly */
+.dropdown-btn {
+  padding: 1rem 1rem;
+  border-radius: 4rem;
+  background-color: var(--main-color);
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: .1rem;
+  transition: .3s ease;
+  border: none;
+}
+
+.dropdown-btn:hover {
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 1rem var(--main-color);
+}
